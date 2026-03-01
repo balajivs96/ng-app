@@ -1,0 +1,213 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <!-- Left Column -->
+    <div class="col-sm-6">
+      <!-- Username -->
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          placeholder="Username"
+          formControlName="username"
+          [class.is-invalid]="
+            registerForm.get('username')?.invalid && registerForm.get('username')?.touched
+          "
+          required
+        />
+        <label for="username">Username</label>
+
+        @if (
+          registerForm.get('username')?.errors?.['required'] &&
+          registerForm.get('username')?.touched
+        ) {
+          <div class="invalid-feedback">Username is required.</div>
+        }
+      </div>
+
+      <!-- Email -->
+      <div class="form-floating mb-3">
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="name@example.com"
+          formControlName="email"
+          [class.is-invalid]="
+            registerForm.get('email')?.invalid && registerForm.get('email')?.touched
+          "
+          required
+        />
+        <label for="email">Email address</label>
+
+        @if (
+          registerForm.get('email')?.errors?.['required'] && registerForm.get('email')?.touched
+        ) {
+          <div class="invalid-feedback">Email is required.</div>
+        } @else if (
+          registerForm.get('email')?.errors?.['email'] && registerForm.get('email')?.touched
+        ) {
+          <div class="invalid-feedback">Valid email is required.</div>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="form-floating mb-3">
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Password"
+          formControlName="password"
+          [class.is-invalid]="
+            registerForm.get('password')?.invalid && registerForm.get('password')?.touched
+          "
+          required
+          minlength="6"
+        />
+        <label for="password">Password</label>
+        @if (
+          registerForm.get('password')?.errors?.['required'] &&
+          registerForm.get('password')?.touched
+        ) {
+          <div class="invalid-feedback">Password is required.</div>
+        } @else if (
+          registerForm.get('password')?.errors?.['minlength'] &&
+          registerForm.get('password')?.touched
+        ) {
+          <div class="invalid-feedback">Password must be at least 6 characters.</div>
+        }
+      </div>
+    </div>
+
+    <!-- Right Column: Address -->
+    <div class="col-sm-6" [formGroupName]="'address'">
+      <!-- Address Line -->
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="address"
+          placeholder="Address"
+          formControlName="address"
+          [class.is-invalid]="
+            registerForm.get('address.address')?.invalid &&
+            registerForm.get('address.address')?.touched
+          "
+          required
+        />
+        <label for="address">Address</label>
+
+        @if (
+          registerForm.get('address.address')?.errors?.['required'] &&
+          registerForm.get('address.address')?.touched
+        ) {
+          <div class="invalid-feedback">Address is required.</div>
+        }
+      </div>
+
+      <!-- Street -->
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="street"
+          placeholder="Street"
+          formControlName="street"
+          [class.is-invalid]="
+            registerForm.get('address.street')?.invalid &&
+            registerForm.get('address.street')?.touched
+          "
+          required
+        />
+        <label for="street">Street</label>
+
+        @if (
+          registerForm.get('address.street')?.errors?.['required'] &&
+          registerForm.get('address.street')?.touched
+        ) {
+          <div class="invalid-feedback">Street is required.</div>
+        }
+      </div>
+
+      <!-- City -->
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          placeholder="City"
+          formControlName="city"
+          [class.is-invalid]="
+            registerForm.get('address.city')?.invalid && registerForm.get('address.city')?.touched
+          "
+          required
+        />
+        <label for="city">City</label>
+
+        @if (
+          registerForm.get('address.city')?.errors?.['required'] &&
+          registerForm.get('address.city')?.touched
+        ) {
+          <div class="invalid-feedback">City is required.</div>
+        }
+      </div>
+
+      <!-- State -->
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="state"
+          placeholder="State"
+          formControlName="state"
+          [class.is-invalid]="
+            registerForm.get('address.state')?.invalid && registerForm.get('address.state')?.touched
+          "
+          required
+        />
+        <label for="state">State</label>
+
+        @if (
+          registerForm.get('address.state')?.errors?.['required'] &&
+          registerForm.get('address.state')?.touched
+        ) {
+          <div class="invalid-feedback">State is required.</div>
+        }
+      </div>
+
+      <!-- Zipcode -->
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="zipCode"
+          placeholder="Zipcode"
+          formControlName="zipCode"
+          [class.is-invalid]="
+            registerForm.get('address.zipCode')?.invalid &&
+            registerForm.get('address.zipCode')?.touched
+          "
+          required
+        />
+        <label for="zipCode">Zipcode</label>
+
+        @if (
+          registerForm.get('address.zipCode')?.errors?.['required'] &&
+          registerForm.get('address.zipCode')?.touched
+        ) {
+          <div class="invalid-feedback">Zipcode is required.</div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="row">
+    <div class="col-12 text-center mt-3">
+      <button type="submit" class="btn btn-primary px-5" [disabled]="!registerForm.valid">
+        Register
+      </button>
+    </div>
+  </div>
+</form>

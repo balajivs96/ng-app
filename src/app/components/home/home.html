@@ -1,0 +1,16 @@
+<div class="container text-center mt-5">
+  <h1>Welcome to the Home Page</h1>
+
+  <p class="lead">This is the home page of our Todo application.</p>
+  <!-- <p>Use the navigation bar to explore different sections of the app.</p>
+  <input type="text" [formControl]="searchControl" placeholder="Search users..." /> -->
+  @if (loading) {
+    <div>Loading...</div>
+  }
+
+  <ul>
+    @for (user of results; track user.id) {
+      <li>{{ user.name }} - {{ user.email }}</li>
+    }
+  </ul>
+</div>

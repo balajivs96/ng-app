@@ -1,0 +1,50 @@
+<div class="container text-center my-4">
+  <h1>Login to Your Account</h1>
+  <div class="row justify-content-center mb-4">
+    <div class="col-sm-6">
+      <form (ngSubmit)="onSubmit(login)" #login="ngForm">
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+            name="email"
+            [(ngModel)]="loginForm.email"
+            #email="ngModel"
+            required
+            [class.is-invalid]="email.invalid && email.touched"
+          />
+          <label for="floatingInput">Email address</label>
+          @if (email.invalid && email.touched) {
+            <div class="invalid-feedback text-start">Email is required and must be valid.</div>
+          }
+        </div>
+
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+            name="password"
+            [(ngModel)]="loginForm.password"
+            #password="ngModel"
+            required
+            [class.is-invalid]="password.invalid && password.touched"
+            minlength="6"
+          />
+          <label for="floatingPassword">Password</label>
+          @if (password.errors?.['required'] && password.touched) {
+            <div class="invalid-feedback text-start">Password is required.</div>
+          } @else if (password.errors?.['minlength'] && password.touched) {
+            <div class="invalid-feedback text-start">Password must be at least 6 characters.</div>
+          }
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mt-4" [disabled]="!login.valid">
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
