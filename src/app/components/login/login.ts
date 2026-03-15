@@ -2,6 +2,10 @@ import { Component, inject, signal } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Apiendpoint } from '../../services/apiendpoint';
 import { Router } from '@angular/router';
+import { loginSuccess } from '../../store/auth/auth.actions';
+
+import { Store } from '@ngrx/store';
+
 
 @Component({
   selector: 'app-login',
@@ -17,11 +21,13 @@ export class Login {
 
   api = inject(Apiendpoint);
   router = inject(Router);
+  store = inject(Store);
   onSubmit(form: NgForm) {
+    let { email, password } = this.loginForm;
     if (form.valid) {
       this.api.login(this.loginForm).subscribe({
         next: (response) => {
-          console.log('Login successful:', response);
+          this.store.dispatch(loginSuccess({ user: { email } }));
           this.router.navigate(['/']);
         },
         error: (error) => {

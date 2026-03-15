@@ -1,16 +1,32 @@
 <div class="container text-center mt-5">
   <h1>Welcome to the Home Page</h1>
-
   <p class="lead">This is the home page of our Todo application.</p>
-  <!-- <p>Use the navigation bar to explore different sections of the app.</p>
-  <input type="text" [formControl]="searchControl" placeholder="Search users..." /> -->
-  @if (loading) {
-    <div>Loading...</div>
+
+  <!-- Search input -->
+  <input
+    type="text"
+    [formControl]="searchControl"
+    placeholder="Search users..."
+    class="form-control mb-3"
+  />
+
+  @if(loading) {
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
   }
 
-  <ul>
-    @for (user of results; track user.id) {
-      <li>{{ user.name }} - {{ user.email }}</li>
-    }
-  </ul>
+  @if (results.length > 0) {
+    <ul class="list-group">
+      @for (user of results; track user.id) {
+        <li class="list-group-item">{{ user.username }} ({{ user.email }})</li>
+      }
+    </ul>
+  }
+
+  {{ results | json }} - {{ loading }}
+
+  @if (!loading && results.length === 0) {
+    <p>No users found.</p>
+  }
 </div>
